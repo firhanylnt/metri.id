@@ -1,14 +1,12 @@
 "use client";
-
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useRouter } from 'next/navigation';
 
-const Hero = () => {
+const EventDetail = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [count, setICount] = useState(450);
   const [bookingCode, setBookingCode] = useState("");
-  const router = useRouter();
 
   // Generate random booking code
   const generateBookingCode = () => {
@@ -34,52 +32,46 @@ const Hero = () => {
     onSubmit: (values) => {
       const newBookingCode = generateBookingCode();
       setBookingCode(newBookingCode);
+      setICount(count - 1);
       setIsOpen(false);
       formik.resetForm();
     },
   });
 
   return (
-    <section
-      className="relative text-white text-center bg-cover w-full min-h-screen flex flex-col justify-center px-6 sm:px-12"
-      style={{ backgroundImage: "url('/images/banner.jpg')" }}
-    >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-90"></div>
+    <section className="relative w-full min-h-screen px-6 sm:px-12 py-10">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        {/* Event Image */}
+        <div className="w-full md:w-1/2">
+          <img src="/images/event.jpeg" alt="Event" className="w-full h-auto rounded-lg shadow-lg" />
+        </div>
 
-      {/* Content */}
-      <div className="relative z-1 flex flex-col items-center mb-[50px]">
-        <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold">
-          Annual Conference 2025
-        </h1>
-        <p className="mt-4 text-sm sm:text-md max-w-lg sm:max-w-2xl">
-          This is PT Maybank Indonesia Finance's annual agenda to appreciate the achievements in 2024 for Mayfiner throughout Indonesia. At the same time, this activity was held to motivate Mayfiners to improve performance and achievements in 2025.
-        </p>
+        {/* Event Information */}
+        <div className="w-full md:w-1/2 text-center md:text-left">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4">Annual Conference 2025</h1>
+          <p className="text-sm sm:text-md mb-6 max-w-lg sm:max-w-2xl">
+            This is PT Maybank Indonesia Finance's annual agenda to appreciate the achievements in 2024 for Mayfiner throughout Indonesia.
+            At the same time, this activity was held to motivate Mayfiners to improve performance and achievements in 2025.
+          </p>
+          <p className="text-sm sm:text-md max-w-lg sm:max-w-2xl">
+            Date: 2 Maret 2025
+          </p>
+          <p className="text-sm sm:text-md mb-6 max-w-lg sm:max-w-2xl">
+            Location: Shinta Ballroom Lantai 6, Jl. Hayam Wuruk, RT.1/RW.6, Mangga Besar, Kec. Taman Sari, Kota Jakarta Barat
 
-        <button
-          onClick={() => router.push('/detail')}
-          className="px-6 py-3 mt-5 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-600 transition duration-300"
-        >
-          Register Now
-        </button>
-      </div>
+          </p>
+          <div className="flex items-center gap-4">
+          <p className="font-bold">{count} Left!</p>
+            <button
+                onClick={() => setIsOpen(true)}
+                className="px-6 py-3 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-600 transition duration-300"
+            >
+                Register Now
+            </button>
+            
+        </div>
 
-      {/* Sponsor Section - Responsive */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center">
-        <h4 className="text-lg sm:text-xl font-bold">Our Sponsor</h4>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mt-2">
-          <button className="w-full px-4 py-2 sm:px-6 sm:py-3 bg-transparent text-white border-2 border-white font-bold rounded-lg">
-            Sponsor 1
-          </button>
-          <button className="w-full px-4 py-2 sm:px-6 sm:py-3 bg-transparent text-white border-2 border-white font-bold rounded-lg">
-            Sponsor 2
-          </button>
-          <button className="w-full px-4 py-2 sm:px-6 sm:py-3 bg-transparent text-white border-2 border-white font-bold rounded-lg">
-            Sponsor 3
-          </button>
-          <button className="w-full px-4 py-2 sm:px-6 sm:py-3 bg-transparent text-white border-2 border-white font-bold rounded-lg">
-            Sponsor 4
-          </button>
+         
         </div>
       </div>
 
@@ -180,4 +172,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default EventDetail;
