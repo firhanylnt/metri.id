@@ -1,9 +1,31 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 
 const Hero = () => {
   const router = useRouter();
+  const calculateTimeLeft = () => {
+      const eventDate = new Date("2025-03-02").getTime();
+      const now = new Date().getTime();
+      const difference = eventDate - now;
+  
+      return {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / (1000 * 60)) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    };
+  
+    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  
+    useEffect(() => {
+      const timer = setInterval(() => {
+        setTimeLeft(calculateTimeLeft());
+      }, 1000);
+      return () => clearInterval(timer);
+    }, []);
 
   return (
     <section
@@ -11,12 +33,12 @@ const Hero = () => {
       style={{ backgroundImage: "url('/images/banner.jpg')" }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-90"></div>
+      <div className="absolute inset-0 bg-black bg-opacity-85"></div>
 
       {/* Content */}
       <div className="relative z-1 flex flex-col items-center mb-[50px]">
         <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold">
-          Annual Conference 2025
+          Maybank Annual Conference 2025
         </h1>
         <p className="mt-4 text-sm sm:text-md max-w-lg sm:max-w-2xl">
           This is PT Maybank Indonesia Finance's annual agenda to appreciate the achievements in 2024 for Mayfiner throughout Indonesia. At the same time, this activity was held to motivate Mayfiners to improve performance and achievements in 2025.
@@ -30,8 +52,27 @@ const Hero = () => {
         </button>
       </div>
 
+      {/* Countdown Timer */}
+      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-center">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xl sm:text-3xl md:mt-[100px] mt-5 mb-5">
+          <div className="border-2 border-yellow-400 rounded-lg p-4 text-center">
+            {timeLeft.days} <span className="block text-sm sm:text-lg">Days</span>
+          </div>
+          <div className="border-2 border-yellow-400 rounded-lg p-4 text-center">
+            {timeLeft.hours} <span className="block text-sm sm:text-lg">Hours</span>
+          </div>
+          <div className="border-2 border-yellow-400 rounded-lg p-4 text-center">
+            {timeLeft.minutes} <span className="block text-sm sm:text-lg">Minutes</span>
+          </div>
+          <div className="border-2 border-yellow-400 rounded-lg p-4 text-center">
+            {timeLeft.seconds} <span className="block text-sm sm:text-lg">Seconds</span>
+          </div>
+        </div>
+      </div>
+     
+
       {/* Sponsor Section - Responsive */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center">
+      {/* <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center">
         <h4 className="text-lg sm:text-xl font-bold">Our Sponsor</h4>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mt-2">
           <button className="w-full px-4 py-2 sm:px-6 sm:py-3 bg-transparent text-white border-2 border-white font-bold rounded-lg">
@@ -47,7 +88,7 @@ const Hero = () => {
             Sponsor 4
           </button>
         </div>
-      </div>
+      </div> */}
 
     </section>
   );

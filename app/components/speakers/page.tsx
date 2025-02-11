@@ -6,16 +6,17 @@ const speakers = [
 ];
 
 const dress = [
-  { name: "Douglas Alvarado", role: "Chief Guest Speaker", img: "/images/dc1.png" },
-  { name: "Jane Doe", role: "Marketing Expert", img: "/images/dc2.png" },
-  { name: "Jane Doe", role: "Marketing Expert", img: "/images/dc3.png" },
+  { name: "Douglas Alvarado", role: "Chief Guest Speaker", img: "/images/c1.png" },
+  { name: "Jane Doe", role: "Marketing Expert", img: "/images/c2.png" },
+  { name: "Jane Doe", role: "Marketing Expert", img: "/images/c5.png" },
+  { name: "Jane Doe", role: "Marketing Expert", img: "/images/c4.png" },
 ];
 
 const Speakers = () => {
   return (
     <section className="py-12 text-white text-center">
       {/* Speakers Section */}
-      <h2 className="text-3xl text-center font-bold">Speakers</h2>
+      <h2 className="text-3xl text-center font-bold md:mb-[100px]">Speakers</h2>
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-6 mb-6">
         {speakers.map((speaker, index) => (
           <div key={index} className="flex flex-col items-center text-center">
@@ -32,16 +33,16 @@ const Speakers = () => {
 
       {/* Dress Code Section */}
       <h2 className="text-3xl text-center font-bold md:mt-[100px] mt-[50px]">Dress Code</h2>
-      <p className="md:text-md text-sm text-center">
-        Elegan & formal, dominan nuansa warna emas dengan padu padan warna hitam
+      <p className="md:text-md text-sm text-center text-yellow-500 font-bold">
+        Black & Gold
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-9">
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-6 mt-[100px]">
         {dress.map((speaker, index) => (
           <div key={index} className="flex flex-col items-center text-center">
             <img
               src={speaker.img}
               alt={speaker.name}
-              className="w-auto h-[150px] sm:h-[180px] md:h-[200px] mx-auto"
+              className="w-auto h-[150px] sm:h-[180px] md:h-[200px] mx-auto bg-white rounded-lg border-2 border-yellow-500"
             />
           </div>
         ))}
