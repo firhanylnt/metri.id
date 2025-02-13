@@ -15,8 +15,8 @@ const EventDetail = () => {
 
     const existNpk = [{
         npk: '1234',
-        firstName: 'John',
-        lastName: 'Chena',
+        fullname: 'John Chena',
+        cabang: 'Jakarta',
         email: 'john@email.com',
         phone: '0811223344',
         birthday: "1990-01-12",
@@ -34,21 +34,21 @@ const EventDetail = () => {
     const formik = useFormik({
         initialValues: {
             npk: "",
-            firstName: "",
-            lastName: "",
+            fullname: "",
+            cabang: "",
             email: "",
             phone: "",
             birthday: "",
         },
         validationSchema: Yup.object({
-            npk: Yup.string().required("NPK is required"),
-            firstName: Yup.string().required("First Name is required"),
-            lastName: Yup.string().required("Last Name is required"),
-            email: Yup.string().email("Invalid email address").required("Email is required"),
-            birthday: Yup.date().required("Birthday is required"),
+            npk: Yup.string().required("NPK tidak boleh kosong"),
+            fullname: Yup.string().required("Nama Lengkap tidak boleh kosong"),
+            cabang: Yup.string().required("Cabang tidak boleh kosong"),
+            email: Yup.string().email("Email tidak valid").required("Email tidak boleh kosong"),
+            birthday: Yup.date().required("Tanggal Lahir tidak boleh kosong"),
             phone: Yup.string()
-                .matches(/^[0-9]+$/, "Phone number must be numeric")
-                .required("Phone number is required"),
+                .matches(/^[0-9]+$/, "Nomor Telepon harus berupa angka")
+                .required("Nomor Telepon tidak boleh kosong"),
         }),
         onSubmit: (values) => {
             const newBookingCode = generateBookingCode();
@@ -77,15 +77,27 @@ const EventDetail = () => {
                 <div className="w-full md:w-1/2 text-center md:text-left">
                     <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4">Annual Conference 2025</h1>
                     <p className="text-sm sm:text-md mb-6 max-w-lg sm:max-w-2xl">
-                        This is PT Maybank Indonesia Finance's annual agenda to appreciate the achievements in 2024 for Mayfiner throughout Indonesia.
-                        At the same time, this activity was held to motivate Mayfiners to improve performance and achievements in 2025.
-                    </p>
-                    <p className="text-sm sm:text-md max-w-lg sm:max-w-2xl">
-                        Date: 2 Maret 2025
-                    </p>
-                    <p className="text-sm sm:text-md mb-6 max-w-lg sm:max-w-2xl">
-                        Location: Shinta Ballroom Lantai 6, Jl. Hayam Wuruk, RT.1/RW.6, Mangga Besar, Kec. Taman Sari, Kota Jakarta Barat
-
+                    PT Maybank Indonesia Finance akan mengadakan acara tahunan untuk memberikan apresiasi atas pencapaian di tahun 2024 bagi seluruh Mayfiners. Kegiatan ini juga bertujuan untuk memotivasi Mayfiners dalam meningkatkan kinerja dan pencapaian di tahun 2025.
+                    <br />
+                    <br />
+                    Detail Acara:
+                    <br />
+                    Tanggal: Minggu, 2 Maret 2025.
+                    <br />
+                    <br />
+                    Waktu: 13.30 WIB - Selesai.
+                    <br />
+                    <br />
+                    Lokasi: Grand Ballroom - Sun City, Lindeteves Trade Center.
+                    <br />
+                    <br />
+                    Segera lakukan registrasi untuk memastikan keikutsertaan dalam acara ini.
+                    <br />
+                    <br />
+                    Terima kasih atas perhatian dan partisipasinya.
+                    <br />
+                    <br />
+                    [PT Maybank Indonesia Finance]
                     </p>
                     <div className="flex items-center gap-4">
                         <p className="font-bold">{count} Left!</p>
@@ -131,34 +143,34 @@ const EventDetail = () => {
 
                             <input
                                 type="text"
-                                name="firstName"
-                                placeholder="First Name"
+                                name="fullname"
+                                placeholder="Nama Lengkap"
                                 className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.firstName}
+                                value={formik.values.fullname}
                             />
-                            {formik.touched.firstName && formik.errors.firstName && (
-                                <p className="text-red-500 text-sm">{formik.errors.firstName}</p>
+                            {formik.touched.fullname && formik.errors.fullname && (
+                                <p className="text-red-500 text-sm">{formik.errors.fullname}</p>
                             )}
 
                             <input
                                 type="text"
-                                name="lastName"
-                                placeholder="Last Name"
+                                name="cabang"
+                                placeholder="Cabang"
                                 className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.lastName}
+                                value={formik.values.cabang}
                             />
-                            {formik.touched.lastName && formik.errors.lastName && (
-                                <p className="text-red-500 text-sm">{formik.errors.lastName}</p>
+                            {formik.touched.cabang && formik.errors.cabang && (
+                                <p className="text-red-500 text-sm">{formik.errors.cabang}</p>
                             )}
 
                             <input
                                 type={formik.values.birthday ? "date" : "text"}
                                 name="birthday"
-                                placeholder="Birthday"
+                                placeholder="Tanggal Lahir"
                                 className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
@@ -189,7 +201,7 @@ const EventDetail = () => {
                             <input
                                 type="text"
                                 name="phone"
-                                placeholder="Phone Number"
+                                placeholder="Nomor Telepon"
                                 className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}

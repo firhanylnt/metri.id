@@ -35,12 +35,7 @@ const SpeakerSlider = () => {
       >
         {speakers.map((speaker, index) => (
           <SwiperSlide key={index} >
-            <div className="flex flex-col items-center text-center p-4 border-2 border-yellow-500 rounded-lg shadow-lg">
-              <img
-                src={speaker.img}
-                alt={speaker.name}
-                className="rounded-full object-cover w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] md:w-32 md:h-32"
-              />
+            <div className="flex flex-col z-0 items-center text-center p-4 border-2 border-yellow-500 rounded-lg shadow-lg">
               <h3 className="mt-2 text-lg font-semibold text-white">{speaker.name}</h3>
               <p className="text-sm text-gray-300">{speaker.role}</p>
               <p className="mt-2 text-sm text-gray-400 italic">"{speaker.testi}"</p>
