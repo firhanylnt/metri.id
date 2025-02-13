@@ -156,7 +156,7 @@ const EventDetail = () => {
                             )}
 
                             <input
-                                type="date"
+                                type={formik.values.birthday ? "date" : "text"}
                                 name="birthday"
                                 placeholder="Birthday"
                                 className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
@@ -164,6 +164,10 @@ const EventDetail = () => {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.birthday}
                                 style={{ colorScheme: 'dark' }}
+                                onFocus={(e) => (e.target.type = "date")}
+                                // onBlur={(e) => {
+                                //     if (!e.target.value) e.target.type = "text"; // Kembali ke text jika kosong
+                                // }}
                             />
                             {formik.touched.birthday && formik.errors.birthday && (
                                 <p className="text-red-500 text-sm">{formik.errors.birthday}</p>
