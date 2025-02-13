@@ -1,0 +1,13 @@
+  /* Ubah warna arrow menjadi kuning */
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    color: #facc15 !important; /* Tailwind yellow-500 */
+    font-size: 24px !important;
+  }
+  
+  /* Tambahkan hover effect */
+  .swiper-button-next:hover::after,
+  .swiper-button-prev:hover::after {
+    color: #eab308 !important; /* Tailwind yellow-600 */
+  }
+  

@@ -1,8 +1,21 @@
+"use client"
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import SpeakerSlider from "./swiper";
+
 const speakers = [
-  { name: "Douglas Alvarado", role: "CEO", img: "/images/p1.jpg" },
-  { name: "Jane Sarah", role: "COO", img: "/images/p2.jpg" },
-  { name: "Felix Odo", role: "CFO", img: "/images/p3.jpg" },
-  { name: "Michael Smith", role: "CMO", img: "/images/p3.jpg" },
+  { name: "Douglas Alvarado", role: "CEO", img: "/images/p1.jpg", 'testi': 'lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet' },
+  { name: "Jane Sarah", role: "COO", img: "/images/p2.jpg", 'testi': 'lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet' },
+  { name: "Felix Odo", role: "CFO", img: "/images/p3.jpg", 'testi': 'lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet' },
+  { name: "Michael Smith", role: "CMO", img: "/images/p3.jpg", 'testi': 'lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet' },
+  { name: "Douglas Alvarado", role: "CEO", img: "/images/p1.jpg", 'testi': 'lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet' },
+  { name: "Jane Sarah", role: "COO", img: "/images/p2.jpg", 'testi': 'lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet' },
+  { name: "Felix Odo", role: "CFO", img: "/images/p3.jpg", 'testi': 'lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet' },
+  { name: "Michael Smith", role: "CMO", img: "/images/p3.jpg", 'testi': 'lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet lorem ipsum dollar sianet' },
 ];
 
 const dress = [
@@ -15,23 +28,8 @@ const dress = [
 const Speakers = () => {
   return (
     <section className="py-12 text-white text-center">
-      {/* Speakers Section */}
       <h2 className="text-3xl text-center font-bold md:mb-[100px]">Speakers</h2>
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-6 mb-6">
-        {speakers.map((speaker, index) => (
-          <div key={index} className="flex flex-col items-center text-center">
-            <img
-              src={speaker.img}
-              alt={speaker.name}
-              className="rounded-full object-cover w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] md:w-32 md:h-32"
-            />
-            <h3 className="mt-2 text-lg font-semibold">{speaker.name}</h3>
-            <p className="text-sm">{speaker.role}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Dress Code Section */}
+      <SpeakerSlider />
       <h2 className="text-3xl text-center font-bold md:mt-[100px] mt-[50px]">Dress Code</h2>
       <p className="md:text-md text-sm text-center text-yellow-500 font-bold">
         Black & Gold
