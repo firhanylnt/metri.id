@@ -28,7 +28,7 @@ const dress = [
 const Speakers = () => {
   return (
     <section className="py-12 text-white text-center">
-      <h2 className="text-3xl text-center font-bold md:mb-[100px]">Speakers</h2>
+      <h2 className="text-3xl text-center font-bold md:mb-[100px]">Testimoni</h2>
       <SpeakerSlider />
       <h2 className="text-3xl text-center font-bold md:mt-[100px] mt-[50px]">Dress Code</h2>
       <p className="md:text-md text-sm text-center text-yellow-500 font-bold">
