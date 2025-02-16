@@ -14,16 +14,16 @@ const EventDetail = () => {
     };
 
     const existNpk = [
-        {npk: '050340',fullname: 'ALEXANDER',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '020087',fullname: 'ARIEF SOERENDRO',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '060449',fullname: 'MIKI EFFENDI LIM',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '070510',fullname: 'RICKY HERTANU',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '010022',fullname: 'MAMAN SUPRIYATNA',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '249880',fullname: 'BONNY P. MANOEROE',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '020100',fullname: 'SUFIANA',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '101185',fullname: 'ANTON',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '112050',fullname: 'IKA SETIAWATI GUNAWAN',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '080783',fullname: 'FELIK A IRIANTO SUNDAH',cabang: 'HEAD OFFICE',birthday: ""},
+        {npk: '050340',email: 'alex3806@hotmail.com', fullname: 'ALEXANDER',cabang: 'HEAD OFFICE',birthday: ""},
+        {npk: '020087',email: 'ariefsoerendro@gmail.com', fullname: 'ARIEF SOERENDRO',cabang: 'HEAD OFFICE',birthday: ""},
+        {npk: '060449',email: 'mikieffendi@gmail.com', fullname: 'MIKI EFFENDI LIM',cabang: 'HEAD OFFICE',birthday: ""},
+        {npk: '070510',email: 'ricky_hertanu@hotmail.com', fullname: 'RICKY HERTANU',cabang: 'HEAD OFFICE',birthday: ""},
+        {npk: '010022',email: 'mamans1972@gmail.com', fullname: 'MAMAN SUPRIYATNA',cabang: 'HEAD OFFICE',birthday: ""},
+        {npk: '249880',email: 'bpermedi2000@gmail.com', fullname: 'BONNY P. MANOEROE',cabang: 'HEAD OFFICE',birthday: ""},
+        {npk: '020100',email: 'sufi_tho@yahoo.com', fullname: 'SUFIANA',cabang: 'HEAD OFFICE',birthday: ""},
+        {npk: '101185',email: 'anton.antonio1027@gmail.com', fullname: 'ANTON',cabang: 'HEAD OFFICE',birthday: ""},
+        {npk: '112050',email: 'isg1908@gmail.com', fullname: 'IKA SETIAWATI GUNAWAN',cabang: 'HEAD OFFICE',birthday: ""},
+        {npk: '080783',email: 'felix.sundah@hotmail.com', fullname: 'FELIK A IRIANTO SUNDAH',cabang: 'HEAD OFFICE',birthday: ""},
     ]
 
     const getNpk = (npkValue: string) => {
@@ -39,11 +39,13 @@ const EventDetail = () => {
             npk: "",
             fullname: "",
             cabang: "",
+            email: "",
             birthday: "",
         },
         validationSchema: Yup.object({
             npk: Yup.string().required("NPK tidak boleh kosong"),
             fullname: Yup.string().required("Nama Lengkap tidak boleh kosong"),
+            email: Yup.string().email("Email tidak valid").required("Email tidak boleh kosong"),
             cabang: Yup.string().required("Cabang tidak boleh kosong"),
             birthday: Yup.date().required("Tanggal Lahir tidak boleh kosong"),
         }),
@@ -162,6 +164,19 @@ const EventDetail = () => {
                             />
                             {formik.touched.cabang && formik.errors.cabang && (
                                 <p className="text-red-500 text-sm">{formik.errors.cabang}</p>
+                            )}
+
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.email}
+                            />
+                            {formik.touched.email && formik.errors.email && (
+                                <p className="text-red-500 text-sm">{formik.errors.email}</p>
                             )}
 
                             <input
