@@ -40,10 +40,10 @@ const Hero = () => {
         <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold">
           Maybank Finance<br /> Annual Conference 2025
         </h1>
-        <p className="mt-4 text-sm sm:text-md max-w-lg sm:max-w-2xl">
-        Selamat datang, Mayfiners!<br />
+        <p className="text-md sm:text-md max-w-lx sm:max-w-2xl mt-[30px]">
+        <b>Selamat datang, Mayfiners!</b>
         <br />Anda adalah peserta terundang dalam Maybank Finance Annual Conference 2025, acara tahunan penuh apresiasi bagi para Mayfiners yang sudah memberikan kontribusi terbaik sepanjang tahun 2024!
-        <br />Prepare yourself for an unforgettable spectacle! Are you ready to be amazed?
+        <br /> <br />Prepare yourself for an unforgettable spectacle! Are you ready to be amazed?
         </p>
 
         <button

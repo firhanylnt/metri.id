@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import SpeakerSlider from "./swiper";
+import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import SpeakerSlider from "./swiper";
 
 const dress = [
   { name: "Douglas Alvarado", role: "Chief Guest Speaker", img: "/images/c1.png" },
@@ -12,11 +12,32 @@ const dress = [
   { name: "Jane Doe", role: "Marketing Expert", img: "/images/c4.png" },
 ];
 
+const existNpk = [
+  { npk: '050340', fullname: 'ALEXANDER', position: 'BOARD OF DIRECTOR', testimoni: "" },
+  { npk: '020087', fullname: 'ARIEF SOERENDRO', position: 'BOARD OF DIRECTOR', testimoni: "" },
+  { npk: '060449', fullname: 'MIKI EFFENDI LIM', position: 'BOARD OF DIRECTOR', testimoni: "" },
+  { npk: '070510', fullname: 'RICKY HERTANU', position: 'DIVISION HEAD', testimoni: "" },
+  { npk: '010022', fullname: 'MAMAN SUPRIYATNA', position: 'DIVISION HEAD', testimoni: "" },
+  { npk: '249880', fullname: 'BONNY P. MANOEROE', position: 'DIVISION HEAD', testimoni: "" },
+  { npk: '020100', fullname: 'SUFIANA', position: 'DIVISION HEAD', testimoni: "" },
+  { npk: '101185', fullname: 'ANTON', position: 'DIVISION HEAD', testimoni: "" },
+  { npk: '112050', fullname: 'IKA SETIAWATI GUNAWAN', position: 'DIVISION HEAD', testimoni: "" },
+  { npk: '080783', fullname: 'FELIK A IRIANTO SUNDAH', position: 'DIVISION HEAD', testimoni: "" },
+]
+
 const Speakers = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const getNpk = (npkValue: string) => {
+    const foundUser = existNpk.find((user) => user.npk === npkValue);
+    if (foundUser) {
+      formik.setValues(foundUser);
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
+      npk: "",
       fullname: "",
       position: "",
       testimoni: "",
@@ -31,6 +52,12 @@ const Speakers = () => {
       formik.resetForm();
     },
   });
+
+  useEffect(() => {
+    if (formik.values.npk) {
+      getNpk(formik.values.npk);
+    }
+  }, [formik.values.npk]);
 
   return (
     <section className="py-12 text-white text-center">
@@ -55,6 +82,19 @@ const Speakers = () => {
 
             {/* Form */}
             <form onSubmit={formik.handleSubmit} className="flex flex-col space-y-4">
+
+              <input
+                type="text"
+                name="npk"
+                placeholder="NPK"
+                className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.npk}
+              />
+              {formik.touched.npk && formik.errors.npk && (
+                <p className="text-red-500 text-sm">{formik.errors.npk}</p>
+              )}
 
               <input
                 type="text"
@@ -104,7 +144,7 @@ const Speakers = () => {
           </div>
         </div>
       )}
-      <h2 className="text-3xl text-center font-bold md:mt-[100px] mt-[50px]" style={{fontStyle: 'italic'}}>Dresscode</h2>
+      <h2 className="text-3xl text-center font-bold md:mt-[100px] mt-[50px]" style={{ fontStyle: 'italic' }}>Dresscode</h2>
       <p className="md:text-md text-sm text-center text-yellow-500 font-bold">
         Black & Gold
       </p>
