@@ -38,7 +38,7 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-1 flex flex-col items-center mb-[50px]">
         <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold">
-          Maybank Finance Annual Conference 2025
+          Maybank Finance<br /> Annual Conference 2025
         </h1>
         <p className="mt-4 text-sm sm:text-md max-w-lg sm:max-w-2xl">
         Selamat datang, Mayfiners!<br />
