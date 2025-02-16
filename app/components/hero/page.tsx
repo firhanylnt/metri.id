@@ -38,17 +38,19 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-1 flex flex-col items-center mb-[50px]">
         <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold">
-          Maybank Annual Conference 2025
+          Maybank Finance Annual Conference 2025
         </h1>
         <p className="mt-4 text-sm sm:text-md max-w-lg sm:max-w-2xl">
-          This is PT Maybank Indonesia Finance's annual agenda to appreciate the achievements in 2024 for Mayfiner throughout Indonesia. At the same time, this activity was held to motivate Mayfiners to improve performance and achievements in 2025.
+        Selamat datang, Mayfiners!<br />
+        <br />Anda adalah peserta terundang dalam Maybank Finance Annual Conference 2025, acara tahunan penuh apresiasi bagi para Mayfiners yang sudah memberikan kontribusi terbaik sepanjang tahun 2024!
+        <br />Prepare yourself for an unforgettable spectacle! Are you ready to be amazed?
         </p>
 
         <button
           onClick={() => router.push('/detail')}
           className="px-6 py-3 mt-5 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-600 transition duration-300"
         >
-          Register Now
+          Let's Get Started
         </button>
       </div>
 
