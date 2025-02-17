@@ -168,19 +168,6 @@ const EventDetail = () => {
                             )}
 
                             <input
-                                type="email"
-                                name="email"
-                                placeholder="Email"
-                                className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.email}
-                            />
-                            {formik.touched.email && formik.errors.email && (
-                                <p className="text-red-500 text-sm">{formik.errors.email}</p>
-                            )}
-
-                            <input
                                 type={formik.values.birthday ? "date" : "text"}
                                 name="birthday"
                                 placeholder="Tanggal Lahir"
