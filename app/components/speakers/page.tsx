@@ -22,7 +22,7 @@ const existNpk = [
   { npk: '020100', fullname: 'SUFIANA', position: 'DIVISION HEAD', testimoni: "" },
   { npk: '101185', fullname: 'ANTON', position: 'DIVISION HEAD', testimoni: "" },
   { npk: '112050', fullname: 'IKA SETIAWATI GUNAWAN', position: 'DIVISION HEAD', testimoni: "" },
-  { npk: '080783', fullname: 'FELIK A IRIANTO SUNDAH', position: 'DIVISION HEAD', testimoni: "" },
+  { npk: '155114', fullname: 'PRIYADI NUR QODRI', position: 'BUSINESS DEVELOPMENT', testimoni: "" },
 ]
 
 const Speakers = () => {
@@ -43,6 +43,7 @@ const Speakers = () => {
       testimoni: "",
     },
     validationSchema: Yup.object({
+      npk: Yup.string().max(6).required("NPK lengkap harus diisi"),
       fullname: Yup.string().required("Nama lengkap harus diisi"),
       position: Yup.string().required("Jabatan lengkap harus diisi"),
       testimoni: Yup.string().required("Testimoni harus diisi"),

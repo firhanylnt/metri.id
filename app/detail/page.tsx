@@ -24,6 +24,7 @@ const EventDetail = () => {
         {npk: '101185',email: 'anton.antonio1027@gmail.com', fullname: 'ANTON',cabang: 'HEAD OFFICE',birthday: ""},
         {npk: '112050',email: 'isg1908@gmail.com', fullname: 'IKA SETIAWATI GUNAWAN',cabang: 'HEAD OFFICE',birthday: ""},
         {npk: '080783',email: 'felix.sundah@hotmail.com', fullname: 'FELIK A IRIANTO SUNDAH',cabang: 'HEAD OFFICE',birthday: ""},
+        {npk: '155114',email: 'priyadinurqodri21@gmail.com', fullname: 'PRIYADI NUR QODRI',cabang: 'HEAD OFFICE',birthday: ""},
     ]
 
     const getNpk = (npkValue: string) => {
@@ -43,7 +44,7 @@ const EventDetail = () => {
             birthday: "",
         },
         validationSchema: Yup.object({
-            npk: Yup.string().required("NPK tidak boleh kosong"),
+            npk: Yup.string().max(6).required("NPK tidak boleh kosong"),
             fullname: Yup.string().required("Nama Lengkap tidak boleh kosong"),
             email: Yup.string().email("Email tidak valid").required("Email tidak boleh kosong"),
             cabang: Yup.string().required("Cabang tidak boleh kosong"),
