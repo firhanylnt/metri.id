@@ -196,6 +196,7 @@ const EventDetail = () => {
 
                             <textarea
                                 name="testimoni"
+                                rows={6}
                                 placeholder="Your Motivational Quotes"
                                 className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
