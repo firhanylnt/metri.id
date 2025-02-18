@@ -14,23 +14,30 @@ const EventDetail = () => {
     };
 
     const existNpk = [
-        {npk: '050340',email: 'alex3806@hotmail.com', fullname: 'ALEXANDER',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '020087',email: 'ariefsoerendro@gmail.com', fullname: 'ARIEF SOERENDRO',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '060449',email: 'mikieffendi@gmail.com', fullname: 'MIKI EFFENDI LIM',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '070510',email: 'ricky_hertanu@hotmail.com', fullname: 'RICKY HERTANU',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '010022',email: 'mamans1972@gmail.com', fullname: 'MAMAN SUPRIYATNA',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '249880',email: 'bpermedi2000@gmail.com', fullname: 'BONNY P. MANOEROE',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '020100',email: 'sufi_tho@yahoo.com', fullname: 'SUFIANA',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '101185',email: 'anton.antonio1027@gmail.com', fullname: 'ANTON',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '112050',email: 'isg1908@gmail.com', fullname: 'IKA SETIAWATI GUNAWAN',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '080783',email: 'felix.sundah@hotmail.com', fullname: 'FELIK A IRIANTO SUNDAH',cabang: 'HEAD OFFICE',birthday: ""},
-        {npk: '155114',email: 'priyadinurqodri21@gmail.com', fullname: 'PRIYADI NUR QODRI',cabang: 'HEAD OFFICE',birthday: ""},
+        { npk: '050340', email: 'alex3806@hotmail.com', fullname: 'ALEXANDER', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
+        { npk: '020087', email: 'ariefsoerendro@gmail.com', fullname: 'ARIEF SOERENDRO', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
+        { npk: '060449', email: 'mikieffendi@gmail.com', fullname: 'MIKI EFFENDI LIM', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
+        { npk: '070510', email: 'ricky_hertanu@hotmail.com', fullname: 'RICKY HERTANU', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
+        { npk: '010022', email: 'mamans1972@gmail.com', fullname: 'MAMAN SUPRIYATNA', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
+        { npk: '249880', email: 'bpermedi2000@gmail.com', fullname: 'BONNY P. MANOEROE', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
+        { npk: '020100', email: 'sufi_tho@yahoo.com', fullname: 'SUFIANA', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
+        { npk: '101185', email: 'anton.antonio1027@gmail.com', fullname: 'ANTON', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
+        { npk: '112050', email: 'isg1908@gmail.com', fullname: 'IKA SETIAWATI GUNAWAN', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
+        { npk: '080783', email: 'felix.sundah@hotmail.com', fullname: 'FELIK A IRIANTO SUNDAH', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
+        { npk: '155114', email: 'priyadinurqodri21@gmail.com', fullname: 'PRIYADI NUR QODRI', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
     ]
 
     const getNpk = (npkValue: string) => {
+        if (!existNpk || !Array.isArray(existNpk)) return;
+    
         const foundUser = existNpk.find((user) => user.npk === npkValue);
         if (foundUser) {
-            formik.setValues(foundUser); // Set all values in form
+            formik.setValues((prevValues) => ({
+                ...prevValues,
+                npk: foundUser.npk,
+                fullname: foundUser.fullname,
+                cabang: foundUser.cabang,
+            }));
         }
     };
 
@@ -42,6 +49,7 @@ const EventDetail = () => {
             cabang: "",
             email: "",
             birthday: "",
+            testimoni: "",
         },
         validationSchema: Yup.object({
             npk: Yup.string().max(6).required("NPK tidak boleh kosong"),
@@ -49,6 +57,7 @@ const EventDetail = () => {
             email: Yup.string().email("Email tidak valid").required("Email tidak boleh kosong"),
             cabang: Yup.string().required("Cabang tidak boleh kosong"),
             birthday: Yup.date().required("Tanggal Lahir tidak boleh kosong"),
+            testimoni: Yup.string().required("Motivational Quotes harus diisi"),
         }),
         onSubmit: (values) => {
             const newBookingCode = generateBookingCode();
@@ -183,6 +192,18 @@ const EventDetail = () => {
                             />
                             {formik.touched.birthday && formik.errors.birthday && (
                                 <p className="text-red-500 text-sm">{formik.errors.birthday}</p>
+                            )}
+
+                            <textarea
+                                name="testimoni"
+                                placeholder="Motivational Quotes"
+                                className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.testimoni}
+                            ></ textarea>
+                            {formik.touched.testimoni && formik.errors.testimoni && (
+                                <p className="text-red-500 text-sm">{formik.errors.testimoni}</p>
                             )}
 
                             <button

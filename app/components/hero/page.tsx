@@ -29,11 +29,19 @@ const Hero = () => {
 
   return (
     <section
-      className="relative text-white text-center bg-cover w-full min-h-screen flex flex-col justify-center px-6 sm:px-12"
-      style={{ backgroundImage: "url('/images/banner.jpg')" }}
+      className="relative text-white text-center bg-cover bg-center min-h-screen flex flex-col justify-center px-6 sm:px-12"
+      style={{ backgroundImage: "url('/images/maybank_logo.jpg')" }}
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-85"></div>
+
+      <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-10">
+        <img
+          src="/images/logo-header.jpg"
+          alt="Maybank Logo"
+          className="w-32 sm:w-40 md:w-48"
+        />
+      </div>
 
       {/* Content */}
       <div className="relative z-1 flex flex-col items-center mb-[50px]">
@@ -55,8 +63,8 @@ const Hero = () => {
       </div>
 
       {/* Countdown Timer */}
-      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-center">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xl sm:text-3xl md:mt-[100px] mt-5 mb-5">
+      <div className="absolute bottom-2 md:left-1/2 transform md:-translate-x-1/2 -translate-x-3 text-center">
+        <div className="grid grid-cols-4 sm:grid-cols-4 gap-4 text-xl sm:text-3xl md:mt-[100px] mt-5 mb-5">
           <div className="border-2 border-yellow-400 rounded-lg p-4 text-center">
             {timeLeft.days} <span className="block text-sm sm:text-lg">Days</span>
           </div>
