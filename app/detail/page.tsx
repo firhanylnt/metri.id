@@ -109,12 +109,12 @@ const EventDetail = () => {
                         [PT Maybank Indonesia Finance]
                     </p>
                     <div className="flex items-center gap-4">
-                        <p className="font-bold">{count} Left!</p>
+                        {/* <p className="font-bold">{count} Left!</p> */}
                         <button
                             onClick={() => setIsOpen(true)}
                             className="px-6 py-3 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-600 transition duration-300"
                         >
-                            Register Now
+                            Register
                         </button>
 
                     </div>
@@ -133,7 +133,7 @@ const EventDetail = () => {
                         >
                             ×
                         </button>
-                        <h2 className="text-2xl text-white font-bold text-center mb-4">Register Now</h2>
+                        <h2 className="text-2xl text-white font-bold text-center mb-4">Register</h2>
 
                         {/* Form */}
                         <form onSubmit={formik.handleSubmit} className="flex flex-col space-y-4">
@@ -196,7 +196,7 @@ const EventDetail = () => {
 
                             <textarea
                                 name="testimoni"
-                                placeholder="Motivational Quotes"
+                                placeholder="Your Motivational Quotes"
                                 className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
