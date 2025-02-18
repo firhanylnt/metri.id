@@ -64,11 +64,11 @@ const Speakers = () => {
     <section className="py-12 text-white text-center">
       <h2 className="text-3xl text-center font-bold md:mb-[100px] mb-[20px]">Motivational Quotes</h2>
       <SpeakerSlider />
-      <h2 className="text-3xl text-center font-bold md:mt-[100px] mt-[50px]" style={{ fontStyle: 'italic' }}>Dresscode</h2>
+      <h2 className="text-3xl text-center font-bold md:mt-[50px] mt-[50px]" style={{ fontStyle: 'italic' }}>Dresscode</h2>
       <p className="md:text-md text-sm text-center text-yellow-500 font-bold">
         Black & Gold
       </p>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 md:mt-[100px] mt-[50px]">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 md:mt-[50px] mt-[50px]">
         {dress.map((speaker, index) => (
           <div key={index} className="flex flex-col items-center text-center">
             <img

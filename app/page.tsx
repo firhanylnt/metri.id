@@ -1,3 +1,4 @@
+"use client";
 import Countdown from "./components/countdown/page";
 import Hero from "./components/hero/page"
 import Speakers from "./components/speakers/page";

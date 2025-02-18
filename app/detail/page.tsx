@@ -2,124 +2,138 @@
 import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
 const EventDetail = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [count, setICount] = useState(450);
+    const [count, setCount] = useState(450);
     const [bookingCode, setBookingCode] = useState("");
+    const [duplicate, setDuplicate] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     // Generate random booking code
     const generateBookingCode = () => {
-        return Math.random().toString(36).substr(2, 8).toUpperCase();
+        return Math.random().toString(36).slice(-4).toUpperCase();
     };
 
-    const existNpk = [
-        { npk: '050340', email: 'alex3806@hotmail.com', fullname: 'ALEXANDER', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
-        { npk: '020087', email: 'ariefsoerendro@gmail.com', fullname: 'ARIEF SOERENDRO', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
-        { npk: '060449', email: 'mikieffendi@gmail.com', fullname: 'MIKI EFFENDI LIM', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
-        { npk: '070510', email: 'ricky_hertanu@hotmail.com', fullname: 'RICKY HERTANU', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
-        { npk: '010022', email: 'mamans1972@gmail.com', fullname: 'MAMAN SUPRIYATNA', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
-        { npk: '249880', email: 'bpermedi2000@gmail.com', fullname: 'BONNY P. MANOEROE', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
-        { npk: '020100', email: 'sufi_tho@yahoo.com', fullname: 'SUFIANA', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
-        { npk: '101185', email: 'anton.antonio1027@gmail.com', fullname: 'ANTON', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
-        { npk: '112050', email: 'isg1908@gmail.com', fullname: 'IKA SETIAWATI GUNAWAN', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
-        { npk: '080783', email: 'felix.sundah@hotmail.com', fullname: 'FELIK A IRIANTO SUNDAH', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
-        { npk: '155114', email: 'priyadinurqodri21@gmail.com', fullname: 'PRIYADI NUR QODRI', cabang: 'HEAD OFFICE', birthday: "", testimoni: "" },
-    ]
+    const getExisting = async (npk: string) => {
+        try {
+            const response = await axios.post('http://localhost:3001/existing', { npk });
 
-    const getNpk = (npkValue: string) => {
-        if (!existNpk || !Array.isArray(existNpk)) return;
-    
-        const foundUser = existNpk.find((user) => user.npk === npkValue);
-        if (foundUser) {
-            formik.setValues((prevValues) => ({
-                ...prevValues,
-                npk: foundUser.npk,
-                fullname: foundUser.fullname,
-                cabang: foundUser.cabang,
-            }));
+            if (response.status !== 200) {
+
+            } else {
+                const { data } = response.data;
+
+                formik.setFieldValue("fullname", data.fullname);
+                formik.setFieldValue("cabang", data.cabang);
+                formik.setFieldValue("email", data.email);
+                formik.setFieldValue("phone_number", data.phone_number);
+            }
+
+
+        } catch (error) {
+            // console.error("Error fetching existing data:", error);
         }
     };
 
-    // Formik configuration
     const formik = useFormik({
         initialValues: {
             npk: "",
             fullname: "",
             cabang: "",
-            email: "",
-            birthday: "",
+            email: "firhan@visinemapictures.com",
+            phone_number: "6282246215335",
+            birthdate: "",
             testimoni: "",
         },
         validationSchema: Yup.object({
             npk: Yup.string().max(6).required("NPK tidak boleh kosong"),
             fullname: Yup.string().required("Nama Lengkap tidak boleh kosong"),
             email: Yup.string().email("Email tidak valid").required("Email tidak boleh kosong"),
+            phone_number: Yup.string().required("Phone Number tidak boleh kosong"),
             cabang: Yup.string().required("Cabang tidak boleh kosong"),
-            birthday: Yup.date().required("Tanggal Lahir tidak boleh kosong"),
+            birthdate: Yup.date().required("Tanggal Lahir tidak boleh kosong"),
             testimoni: Yup.string().required("Motivational Quotes harus diisi"),
         }),
-        onSubmit: (values) => {
-            const newBookingCode = generateBookingCode();
-            setBookingCode(newBookingCode);
-            setICount(count - 1);
-            setIsOpen(false);
-            formik.resetForm();
+        onSubmit: async (values) => {
+            setLoading(true);
+            try {
+                const newBookingCode = "MF" + generateBookingCode();
+                const response = await axios.post('http://localhost:3001/users', {
+                    npk: values.npk,
+                    fullname: values.fullname,
+                    cabang: values.cabang,
+                    email: values.email,
+                    phone_number: values.phone_number,
+                    birthdate: values.birthdate,
+                    testimoni: values.testimoni,
+                    bookingCode: newBookingCode,
+                });
+
+                if (response.status === 200 && response.data.success) {
+                    setBookingCode(newBookingCode);
+                    setCount((prevCount) => prevCount - 1);
+                    setIsOpen(false);
+                    formik.resetForm();
+                } else {
+                    alert(response.data.message || "Duplicate entry detected");
+                }
+                
+            } catch (error) {
+                
+                setDuplicate(true)
+            }
+            setLoading(false);
         },
     });
 
     useEffect(() => {
         if (formik.values.npk) {
-            getNpk(formik.values.npk);
+            getExisting(formik.values.npk);
         }
-    }, [formik.values.npk]);
+        }, [formik.values.npk]);
 
     return (
-        <section className="relative w-full min-h-screen px-6 sm:px-12 py-10">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                {/* Event Image */}
+        <section
+        className="relative text-white text-center bg-cover bg-center min-h-screen flex flex-col justify-center px-6 sm:px-12"
+        style={{ backgroundImage: "url('/images/detail.jpg')" }}
+        >
+
+            <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+            <div className="relative flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="w-full md:w-1/2">
-                    <img src="/images/event.jpeg" alt="Event" className="w-full h-auto rounded-lg shadow-lg" />
+                    <img src="/images/logo-poster.png" alt="Event" className="w-full h-auto rounded-lg shadow-lg" />
                 </div>
 
-                {/* Event Information */}
-                <div className="w-full md:w-1/2 text-center md:text-left">
-                    <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4">Annual Conference 2025</h1>
-                    <p className="text-sm sm:text-md mb-6 max-w-lg sm:max-w-2xl">
+                <div className="w-full md:w-2/3 text-center md:text-left">
+                    <h1 className="text-5xl font-bold mb-4">Maybank Finance Annual Conference 2025</h1>
+                    <p className="text-xl md:text-2xl mb-6">
                         PT Maybank Indonesia Finance akan mengadakan acara tahunan untuk memberikan apresiasi atas pencapaian di tahun 2024 bagi seluruh Mayfiners. Kegiatan ini juga bertujuan untuk memotivasi Mayfiners dalam meningkatkan kinerja dan pencapaian di tahun 2025.
                         <br />
                         <br />
                         Detail Acara:
                         <br />
-                        Tanggal: Minggu, 2 Maret 2025.
                         <br />
+                        Tanggal: Minggu, 2 Maret 2025.
                         <br />
                         Waktu: 13.30 WIB - Selesai.
                         <br />
+                        Lokasi: Grand Ballroom - Sun City.
                         <br />
-                        Lokasi: Grand Ballroom - Sun City, Lindeteves Trade Center.
                         <br />
-                        <br />
-                        Segera lakukan registrasi untuk memastikan keikutsertaan dalam acara ini.
-                        <br />
+                        Segera lakukan registrasi untuk memastikan keikutsertaan.
                         <br />
                         Terima kasih atas perhatian dan partisipasinya.
                         <br />
-                        <br />
                         [PT Maybank Indonesia Finance]
                     </p>
-                    <div className="flex items-center gap-4">
-                        {/* <p className="font-bold">{count} Left!</p> */}
-                        <button
-                            onClick={() => setIsOpen(true)}
-                            className="px-6 py-3 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-600 transition duration-300"
-                        >
-                            Register
-                        </button>
-
-                    </div>
-
-
+                    <button
+                        onClick={() => setIsOpen(true)}
+                        className="px-9 py-3 mb-5 text-xl md:text-3xl bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-600 transition duration-300"
+                    >
+                        Register
+                    </button>
                 </div>
             </div>
 
@@ -135,7 +149,6 @@ const EventDetail = () => {
                         </button>
                         <h2 className="text-2xl text-white font-bold text-center mb-4">Register</h2>
 
-                        {/* Form */}
                         <form onSubmit={formik.handleSubmit} className="flex flex-col space-y-4">
                             <input
                                 type="text"
@@ -177,21 +190,21 @@ const EventDetail = () => {
                             )}
 
                             <input
-                                type={formik.values.birthday ? "date" : "text"}
-                                name="birthday"
+                                type={formik.values.birthdate ? "date" : "text"}
+                                name="birthdate"
                                 placeholder="Tanggal Lahir"
                                 className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.birthday}
+                                value={formik.values.birthdate}
                                 style={{ colorScheme: 'dark' }}
                                 onFocus={(e) => (e.target.type = "date")}
                             // onBlur={(e) => {
                             //     if (!e.target.value) e.target.type = "text"; // Kembali ke text jika kosong
                             // }}
                             />
-                            {formik.touched.birthday && formik.errors.birthday && (
-                                <p className="text-red-500 text-sm">{formik.errors.birthday}</p>
+                            {formik.touched.birthdate && formik.errors.birthdate && (
+                                <p className="text-red-500 text-sm">{formik.errors.birthdate}</p>
                             )}
 
                             <textarea
@@ -208,17 +221,16 @@ const EventDetail = () => {
                             )}
 
                             <button
-                                type="submit"
+                                type={loading ? 'button' : 'submit'}
                                 className="px-6 py-2 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-600 transition duration-300"
                             >
-                                Submit
+                                {loading ? 'Loading ...' : 'Submit'}
                             </button>
                         </form>
                     </div>
                 </div>
             )}
 
-            {/* Booking Code Popup */}
             {bookingCode && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-black text-white border-2 border-yellow-500 p-6 rounded-lg w-80 shadow-lg text-center">
@@ -227,6 +239,20 @@ const EventDetail = () => {
                         <p className="text-2xl font-bold text-yellow-500">{bookingCode}</p>
                         <button
                             onClick={() => setBookingCode("")}
+                            className="mt-4 px-6 py-2 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-600 transition duration-300"
+                        >
+                            OK
+                        </button>
+                    </div>
+                </div>
+            )}
+
+            {duplicate && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-black text-white border-2 border-yellow-500 p-6 rounded-lg w-80 shadow-lg text-center">
+                        <p className="text-lg">Already Registered!</p>
+                        <button
+                            onClick={() => setDuplicate(false)}
                             className="mt-4 px-6 py-2 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-600 transition duration-300"
                         >
                             OK
