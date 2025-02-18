@@ -18,7 +18,7 @@ const EventDetail = () => {
 
     const getExisting = async (npk: string) => {
         try {
-            const response = await axios.post('http://localhost:3001/existing', { npk });
+            const response = await axios.post('https://metri-backend.vercel.app/existing', { npk });
 
             if (response.status !== 200) {
 
@@ -60,7 +60,7 @@ const EventDetail = () => {
             setLoading(true);
             try {
                 const newBookingCode = "MF" + generateBookingCode();
-                const response = await axios.post('http://localhost:3001/users', {
+                const response = await axios.post('https://metri-backend.vercel.app/users', {
                     npk: values.npk,
                     fullname: values.fullname,
                     cabang: values.cabang,

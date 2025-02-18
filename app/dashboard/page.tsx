@@ -24,8 +24,8 @@ const ConfirmationPage = () => {
     const [searchTerm, setSearchTerm] = useState("");
 
     const getdata = async () => {
-        const response = await axios.get("http://localhost:3001/register-user");
-        const total = await axios.get("http://localhost:3001/total");
+        const response = await axios.get("https://metri-backend.vercel.app/register-user");
+        const total = await axios.get("https://metri-backend.vercel.app/total");
         setUsers(response.data.data);
         setFilteredUsers(response.data.data);
         setRegistered(total.data.data.registered);
@@ -37,7 +37,7 @@ const ConfirmationPage = () => {
             setLoading(npk);
             setMessage("");
 
-            const response = await axios.post("http://localhost:3001/confirmation", { npk });
+            const response = await axios.post("https://metri-backend.vercel.app/confirmation", { npk });
 
             if (response.status === 200) {
                 setMessage(`Success: Confirmation sent for NPK ${npk}`);
@@ -57,7 +57,7 @@ const ConfirmationPage = () => {
             setLoadingResend(true)
             setMessage("");
 
-            const response = await axios.post("http://localhost:3001/resend", { npk });
+            const response = await axios.post("https://metri-backend.vercel.app/resend", { npk });
 
             if (response.status === 200) {
                 setMessage(`Success: Confirmation sent for NPK ${npk}`);

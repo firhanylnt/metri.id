@@ -30,7 +30,7 @@ const SpeakerSlider = () => {
 
     const getTesti = async () => {
         try {
-            const response = await axios.get('http://localhost:3001/testi')
+            const response = await axios.get('https://metri-backend.vercel.app/testi')
             if(response.status === 200) {
                 const {data} = response.data;
                 setData(data);
