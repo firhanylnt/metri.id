@@ -18,7 +18,7 @@ const ConfirmationPage = () => {
     const [loading, setLoading] = useState("");
     const [registered, setRegistered] = useState("");
     const [confirm, setConfirm] = useState("");
-    const [loadingResend, setLoadingResend] = useState(false);
+    const [loadingResend, setLoadingResend] = useState("");
     const [message, setMessage] = useState("");
     const [filteredUsers, setFilteredUsers] = useState<Users[]>([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -54,7 +54,7 @@ const ConfirmationPage = () => {
 
     const handleResend = async (npk: string) => {
         try {
-            setLoadingResend(true)
+            setLoadingResend(npk)
             setMessage("");
 
             const response = await axios.post("https://metri-backend.vercel.app/resend", { npk });
@@ -67,7 +67,7 @@ const ConfirmationPage = () => {
         } catch (error) {
             setMessage(`Error: ${error}`);
         } finally {
-            setLoadingResend(false)
+            setLoadingResend("")
         }
     };
 
@@ -152,11 +152,11 @@ const ConfirmationPage = () => {
                                 <td className="border border-gray-300 px-4 py-2">{user.email}</td>
                                 <td className="border border-gray-300 px-4 py-2">{user.phone_number}</td>
                                 <td className="border border-gray-300 px-4 py-2">{user.status ? 'Yes' : 'No'}</td>
-                                <td className="border border-gray-300 px-4 py-2">
+                                <td className="border border-gray-300 px-4 py-2 flex text-center">
                                     {user.status === false && (
                                         <button
                                             onClick={() => handleConfirm(user.npk)}
-                                            className="px-4 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 disabled:bg-gray-400"
+                                            className="px-4 py-1 mr-4 bg-blue-500 text-white rounded hover:bg-blue-700 disabled:bg-gray-400"
                                             disabled={loading === user.npk}
                                         >
                                             {loading === user.npk ? "Processing..." : "Confirm"}
@@ -165,10 +165,10 @@ const ConfirmationPage = () => {
 
                                     <button
                                         onClick={() => handleResend(user.npk)}
-                                        className="px-4 py-1 ml-4 bg-yellow-500 text-white rounded hover:bg-yellow-600 disabled:bg-gray-400"
-                                        disabled={loadingResend}
+                                        className="px-4 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 disabled:bg-gray-400"
+                                        disabled={loading === user.npk}
                                     >
-                                        {loadingResend ? "Processing..." : "Resend"}
+                                        {loadingResend === user.npk ? "Processing..." : "Resend"}
                                     </button>
                                 </td>
                             </tr>
