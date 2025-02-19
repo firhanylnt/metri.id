@@ -120,14 +120,14 @@ const EventDetail = () => {
                         PT Maybank Indonesia Finance akan mengadakan acara tahunan untuk memberikan apresiasi atas pencapaian di tahun 2024 bagi seluruh Mayfiners. Kegiatan ini juga bertujuan untuk memotivasi Mayfiners dalam meningkatkan kinerja dan pencapaian di tahun 2025.
                         <br />
                         <br />
-                        Detail Acara:
+                        Detail Acara
                         <br />
                         <br />
-                        Tanggal: Minggu, 2 Maret 2025.
+                        Hari, Tanggal : Minggu, 2 Maret 2025.
                         <br />
-                        Waktu: 13.30 WIB - Selesai.
+                        Waktu : 13.30 WIB - Selesai.
                         <br />
-                        Lokasi: Grand Ballroom - Sun City.
+                        Lokasi : Grand Ballroom Sun City - Lindeteves Trade Center
                         <br />
                         <br />
                         Segera lakukan registrasi untuk memastikan keikutsertaan.
