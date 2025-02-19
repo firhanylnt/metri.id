@@ -1,7 +1,7 @@
 const Countdown = () => {
 
   return (
-    <div className="flex flex-col items-center text-white text-lg font-bold space-y-6 md:min-h-screen p-4 md:mt-[100px]">
+    <div className="flex flex-col items-center text-white text-lg font-bold space-y-6 md:min-h-screen p-4">
 
       {/* Poster Image */}
       <div className="flex justify-center">
