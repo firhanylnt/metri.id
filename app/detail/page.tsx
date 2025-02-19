@@ -120,7 +120,7 @@ const EventDetail = () => {
                         PT Maybank Indonesia Finance akan mengadakan acara tahunan untuk memberikan apresiasi atas pencapaian di tahun 2024 bagi seluruh Mayfiners. Kegiatan ini juga bertujuan untuk memotivasi Mayfiners dalam meningkatkan kinerja dan pencapaian di tahun 2025.
                         <br />
                         <br />
-                        Detail Acara
+                        <b>Detail Acara</b>
                         <br />
                         <br />
                         Hari, Tanggal : Minggu, 2 Maret 2025.
