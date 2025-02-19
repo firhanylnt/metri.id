@@ -59,7 +59,7 @@ const Hero = () => {
         {/* Button */}
         <button
           onClick={() => router.push("/detail")}
-          className="px-6 py-3 mt-6 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-600 transition duration-300"
+          className="px-6 py-3 mt-6 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-600 transition duration-300" style={{fontStyle: 'italic'}}
         >
           Let's Get Started
         </button>
@@ -68,7 +68,7 @@ const Hero = () => {
       {/* Countdown Timer */}
       <div className="relative z-10 w-full max-w-lg mt-10">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-lg sm:text-2xl">
-          {["Days", "Hours", "Minutes", "Seconds"].map((label, idx) => (
+          {["Hari", "Jam", "Menit", "Detik"].map((label, idx) => (
             <div key={label} className="border-2 border-yellow-400 rounded-lg p-4 flex flex-col items-center">
               <span className="text-3xl font-bold">
                 {Object.values(timeLeft)[idx]}
