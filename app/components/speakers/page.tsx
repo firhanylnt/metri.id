@@ -8,7 +8,7 @@ const dress = [
   { name: "Jane Doe", role: "Marketing Expert", img: "/images/c5.png" },
   { name: "Jane Doe", role: "Marketing Expert", img: "/images/c4.png" },
   { name: "Jane Doe", role: "Marketing Expert", img: "/images/c6.png" },
-  { name: "Jane Doe", role: "Marketing Expert", img: "/images/c6.png" },
+  { name: "Jane Doe", role: "Marketing Expert", img: "/images/c9.png" },
   { name: "Jane Doe", role: "Marketing Expert", img: "/images/c8.png" },
   { name: "Jane Doe", role: "Marketing Expert", img: "/images/c7.png" },
 ];
