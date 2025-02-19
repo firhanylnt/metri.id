@@ -19,7 +19,7 @@ const Speakers = () => {
       {/* <h2 className="text-4xl text-center font-bold md:mb-[50px] mb-[20px]" style={{ fontStyle: 'italic' }}>Motivational Quotes</h2> */}
       {/* <SpeakerSlider /> */}
       <h2 className="text-5xl text-center font-bold md:mt-[10px] mt-[40px]" style={{ fontStyle: 'italic' }}>Dress Code</h2>
-      <p className="md:text-md text-sm text-center text-yellow-500 font-bold">
+      <p className="md:text-3xl text-md text-center text-yellow-500 font-bold" style={{ fontStyle: 'italic' }}>
         Black & Gold
       </p>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-2 md:mt-[50px] mt-[50px]">
