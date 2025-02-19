@@ -75,21 +75,21 @@ const EventDetail = () => {
                 console.log(response.data)
 
                 if (response.data) {
-                    if(response.data.success === false){
+                    if (response.data.success === false) {
                         console.log(response.data)
                         setDuplicate(true)
                         setMessage(response.data.error)
-                    }else{
+                    } else {
                         setBookingCode(newBookingCode);
                         setCount((prevCount) => prevCount - 1);
                         setIsOpen(false);
                         formik.resetForm();
                     }
-                    
+
                 }
-                
+
             } catch (error) {
-                
+
                 setDuplicate(true)
             }
             setLoading(false);
@@ -100,12 +100,12 @@ const EventDetail = () => {
         if (formik.values.npk) {
             getExisting(formik.values.npk);
         }
-        }, [formik.values.npk]);
+    }, [formik.values.npk]);
 
     return (
         <section
-        className="relative text-white text-center bg-cover bg-center min-h-screen flex flex-col justify-center px-6 sm:px-12"
-        style={{ backgroundImage: "url('/images/detail.jpg')" }}
+            className="relative text-white text-center bg-cover bg-center min-h-screen flex flex-col justify-center px-6 sm:px-12"
+            style={{ backgroundImage: "url('/images/detail.jpg')" }}
         >
 
             <div className="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -158,10 +158,10 @@ const EventDetail = () => {
                         <h2 className="text-2xl text-white font-bold text-center mb-4">Register</h2>
 
                         <form onSubmit={formik.handleSubmit} className="flex flex-col space-y-4">
+                            <label className="text-white text-left text-sm">NPK</label>
                             <input
                                 type="text"
                                 name="npk"
-                                placeholder="NPK"
                                 className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
@@ -171,10 +171,10 @@ const EventDetail = () => {
                                 <p className="text-red-500 text-sm">{formik.errors.npk}</p>
                             )}
 
+                            <label className="text-white text-left text-sm">Nama Lengkap</label>
                             <input
                                 type="text"
                                 name="fullname"
-                                placeholder="Nama Lengkap"
                                 className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
@@ -183,11 +183,10 @@ const EventDetail = () => {
                             {formik.touched.fullname && formik.errors.fullname && (
                                 <p className="text-red-500 text-sm">{formik.errors.fullname}</p>
                             )}
-
+                            <label className="text-white text-left text-sm">Cabang</label>
                             <input
                                 type="text"
                                 name="cabang"
-                                placeholder="Cabang"
                                 className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
@@ -197,8 +196,9 @@ const EventDetail = () => {
                                 <p className="text-red-500 text-sm">{formik.errors.cabang}</p>
                             )}
 
+                            <label className="text-white text-left text-sm">Tanggal Lahir</label>
                             <input
-                                type={formik.values.birthdate ? "date" : "text"}
+                                type="date"
                                 name="birthdate"
                                 placeholder="Tanggal Lahir"
                                 className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
@@ -207,18 +207,15 @@ const EventDetail = () => {
                                 value={formik.values.birthdate}
                                 style={{ colorScheme: 'dark' }}
                                 onFocus={(e) => (e.target.type = "date")}
-                            // onBlur={(e) => {
-                            //     if (!e.target.value) e.target.type = "text"; // Kembali ke text jika kosong
-                            // }}
                             />
                             {formik.touched.birthdate && formik.errors.birthdate && (
                                 <p className="text-red-500 text-sm">{formik.errors.birthdate}</p>
                             )}
 
+                            <label className="text-white text-left text-sm">Your Motivational Quotes</label>
                             <textarea
                                 name="testimoni"
-                                rows={6}
-                                placeholder="Your Motivational Quotes"
+                                rows={4}
                                 className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
