@@ -53,13 +53,13 @@ const Hero = () => {
           <b>Selamat datang, Mayfiners!</b> <br />
           Anda adalah peserta terundang dalam Maybank Finance Annual Conference 2025, acara tahunan penuh apresiasi bagi para Mayfiners yang telah memberikan kontribusi terbaik sepanjang tahun 2024!
           <br /> <br />
-          Prepare yourself for an unforgettable spectacle! Are you ready to be amazed?
         </p>
+        <p style={{fontStyle: 'italic'}}>Prepare yourself for an unforgettable spectacle! Are you ready to be amazed?</p>
 
         {/* Button */}
         <button
           onClick={() => router.push("/detail")}
-          className="px-6 py-3 mt-6 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-600 transition duration-300" style={{fontStyle: 'italic'}}
+          className="px-6 py-3 mt-6 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-600 transition duration-300"
         >
           Let's Get Started
         </button>
