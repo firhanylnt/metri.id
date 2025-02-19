@@ -7,6 +7,10 @@ const dress = [
   { name: "Jane Doe", role: "Marketing Expert", img: "/images/c2.png" },
   { name: "Jane Doe", role: "Marketing Expert", img: "/images/c5.png" },
   { name: "Jane Doe", role: "Marketing Expert", img: "/images/c4.png" },
+  { name: "Jane Doe", role: "Marketing Expert", img: "/images/c6.png" },
+  { name: "Jane Doe", role: "Marketing Expert", img: "/images/c6.png" },
+  { name: "Jane Doe", role: "Marketing Expert", img: "/images/c8.png" },
+  { name: "Jane Doe", role: "Marketing Expert", img: "/images/c7.png" },
 ];
 
 const Speakers = () => {
@@ -18,13 +22,13 @@ const Speakers = () => {
       <p className="md:text-md text-sm text-center text-yellow-500 font-bold">
         Black & Gold
       </p>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 md:mt-[50px] mt-[50px]">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-2 md:mt-[50px] mt-[50px]">
         {dress.map((speaker, index) => (
           <div key={index} className="flex flex-col items-center text-center">
             <img
               src={speaker.img}
               alt={speaker.name}
-              className="w-auto h-[150px] sm:h-[180px] md:h-[200px] mx-auto bg-white rounded-lg border-2 border-yellow-500"
+              className="w-[250px] mx-auto bg-white rounded-lg border-2 border-yellow-500"
             />
           </div>
         ))}
