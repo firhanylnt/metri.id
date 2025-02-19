@@ -10,6 +10,7 @@ const EventDetail = () => {
     const [bookingCode, setBookingCode] = useState("");
     const [duplicate, setDuplicate] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");
 
     // Generate random booking code
     const generateBookingCode = () => {
@@ -71,13 +72,20 @@ const EventDetail = () => {
                     bookingCode: newBookingCode,
                 });
 
-                if (response.status === 200 && response.data.success) {
-                    setBookingCode(newBookingCode);
-                    setCount((prevCount) => prevCount - 1);
-                    setIsOpen(false);
-                    formik.resetForm();
-                } else {
-                    alert(response.data.message || "Duplicate entry detected");
+                console.log(response.data)
+
+                if (response.data) {
+                    if(response.data.success === false){
+                        console.log(response.data)
+                        setDuplicate(true)
+                        setMessage(response.data.error)
+                    }else{
+                        setBookingCode(newBookingCode);
+                        setCount((prevCount) => prevCount - 1);
+                        setIsOpen(false);
+                        formik.resetForm();
+                    }
+                    
                 }
                 
             } catch (error) {
@@ -250,7 +258,7 @@ const EventDetail = () => {
             {duplicate && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-black text-white border-2 border-yellow-500 p-6 rounded-lg w-80 shadow-lg text-center">
-                        <p className="text-lg">Already Registered!</p>
+                        <p className="text-lg">{message}</p>
                         <button
                             onClick={() => setDuplicate(false)}
                             className="mt-4 px-6 py-2 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-600 transition duration-300"
