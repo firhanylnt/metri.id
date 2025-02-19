@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Maybank Annual Conference",
-  description: "microsite - Maybank Annual Conference 2025",
+  title: "Maybank Finance Annual Conference 2025",
+  description: "microsite - Maybank Finance Annual Conference 2025",
 };
 
 export default function RootLayout({
