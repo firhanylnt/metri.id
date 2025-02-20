@@ -38,6 +38,7 @@ const ConfirmationPage = () => {
             setMessage("");
 
             const response = await axios.post("https://metri-backend.vercel.app/confirmation", { npk });
+            // const response = await axios.post("http://localhost:3001/confirmation", { npk });
 
             if (response.status === 200) {
                 setMessage(`Success: Confirmation sent for NPK ${npk}`);
@@ -57,6 +58,7 @@ const ConfirmationPage = () => {
             setLoadingResend(npk)
             setMessage("");
 
+            // const response = await axios.post("http://localhost:3001/resend", { npk });
             const response = await axios.post("https://metri-backend.vercel.app/resend", { npk });
 
             if (response.status === 200) {
@@ -128,14 +130,13 @@ const ConfirmationPage = () => {
 
             {message && <p className="mb-4 text-center text-sm text-blue-600">{message}</p>}
 
-            <table className="w-full border-collapse text-white border bg-black border-gray-300">
+            <table className="w-full text-md border-collapse text-white border bg-black border-gray-300">
                 <thead>
                     <tr className="bg-black">
-                        <th className="border border-gray-300 px-4 py-2">#</th>
                         <th className="border border-gray-300 px-4 py-2">NPK</th>
-                        <th className="border border-gray-300 px-4 py-2">Registration Code</th>
-                        <th className="border border-gray-300 px-4 py-2">Fullname</th>
-                        <th className="border border-gray-300 px-4 py-2">Email</th>
+                        <th className="border border-gray-300 px-4 py-2 w-1/12">Registration Code</th>
+                        <th className="border border-gray-300 px-4 py-2 w-1/12">Fullname</th>
+                        <th className="border border-gray-300 px-4 py-2 2-1/6">Email</th>
                         <th className="border border-gray-300 px-4 py-2">Phone Number</th>
                         <th className="border border-gray-300 px-4 py-2">Check In</th>
                         <th className="border border-gray-300 px-4 py-2">Action</th>
@@ -144,28 +145,25 @@ const ConfirmationPage = () => {
                 <tbody>
                     {filteredUsers.length > 0 ? (
                         filteredUsers.map((user, index) => (
-                            <tr key={user.npk} className="text-center">
-                                <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
+                            <tr key={user.npk} className="text-center text-md">
                                 <td className="border border-gray-300 px-4 py-2">{user.npk}</td>
                                 <td className="border border-gray-300 px-4 py-2">{user.bookingCode}</td>
                                 <td className="border border-gray-300 px-4 py-2">{user.fullname}</td>
                                 <td className="border border-gray-300 px-4 py-2">{user.email}</td>
                                 <td className="border border-gray-300 px-4 py-2">{user.phone_number}</td>
                                 <td className="border border-gray-300 px-4 py-2">{user.status ? 'Yes' : 'No'}</td>
-                                <td className="border border-gray-300 px-4 py-2 flex text-center">
-                                    {user.status === false && (
-                                        <button
+                                <td className="border border-gray-300 px-4 py-2">
+                                    <button
                                             onClick={() => handleConfirm(user.npk)}
-                                            className="px-4 py-1 mr-4 bg-blue-500 text-white rounded hover:bg-blue-700 disabled:bg-gray-400"
+                                            className="px-3 py-2 mr-4 text-sm bg-blue-500 text-white rounded hover:bg-blue-700 disabled:bg-gray-400"
                                             disabled={loading === user.npk}
                                         >
-                                            {loading === user.npk ? "Processing..." : "Confirm"}
+                                            {loading === user.npk ? "Processing..." : user.status === false ? "Check In" : "Re-check In"}
                                         </button>
-                                    )}
 
                                     <button
                                         onClick={() => handleResend(user.npk)}
-                                        className="px-4 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 disabled:bg-gray-400"
+                                        className="px-3 py-2 text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600 disabled:bg-gray-400"
                                         disabled={loading === user.npk}
                                     >
                                         {loadingResend === user.npk ? "Processing..." : "Resend"}

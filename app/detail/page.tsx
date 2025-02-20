@@ -62,6 +62,7 @@ const EventDetail = () => {
             try {
                 const newBookingCode = "MF" + generateBookingCode();
                 const response = await axios.post('https://metri-backend.vercel.app/users', {
+                    // const response = await axios.post('http://localhost:3001/users', {
                     npk: values.npk,
                     fullname: values.fullname,
                     cabang: values.cabang,
@@ -89,7 +90,7 @@ const EventDetail = () => {
                 }
 
             } catch (error) {
-
+                console.log(error);
                 setDuplicate(true)
             }
             setLoading(false);
@@ -201,7 +202,7 @@ const EventDetail = () => {
                                 type="date"
                                 name="birthdate"
                                 placeholder="Tanggal Lahir"
-                                className="px-4 py-2 pl-10 border bg-black w-[330px] md:w-full text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
+                                className="px-4 py-2 border bg-black w-[330px] md:w-full text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.birthdate}
