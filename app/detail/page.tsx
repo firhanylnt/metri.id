@@ -162,7 +162,7 @@ const EventDetail = () => {
                             <input
                                 type="text"
                                 name="npk"
-                                className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
+                                className="px-4 py-2 border bg-black w-[330px] md:w-full text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.npk}
@@ -175,7 +175,7 @@ const EventDetail = () => {
                             <input
                                 type="text"
                                 name="fullname"
-                                className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
+                                className="px-4 py-2 border bg-black w-[330px] md:w-full text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.fullname}
@@ -187,7 +187,7 @@ const EventDetail = () => {
                             <input
                                 type="text"
                                 name="cabang"
-                                className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
+                                className="px-4 py-2 border bg-black w-[330px] md:w-full text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.cabang}
@@ -201,7 +201,7 @@ const EventDetail = () => {
                                 type="date"
                                 name="birthdate"
                                 placeholder="Tanggal Lahir"
-                                className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
+                                className="px-4 py-2 pl-10 border bg-black w-[330px] md:w-full text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.birthdate}
@@ -216,7 +216,7 @@ const EventDetail = () => {
                             <textarea
                                 name="testimoni"
                                 rows={4}
-                                className="px-4 py-2 border bg-black text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
+                                className="px-4 py-2 border bg-black w-[330px] md:w-full text-white border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.testimoni}
