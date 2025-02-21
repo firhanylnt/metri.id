@@ -28,7 +28,7 @@ const EventDetail = () => {
 
                 formik.setFieldValue("fullname", data.fullname);
                 formik.setFieldValue("cabang", data.cabang);
-                formik.setFieldValue("email", data.email);
+                formik.setFieldValue("email", data.email.replace(/\s+/g, ''));
                 formik.setFieldValue("phone_number", data.phone_number);
             }
 
