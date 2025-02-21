@@ -8,17 +8,6 @@ import "./custom.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const speakers = [
-    { fullname: "Douglas Alvarado", departemen: "CEO", testimoni: "Lorem ipsum dollar sianet lorem ipsum dollar sianet." },
-    { fullname: "Jane Sarah", departemen: "COO", testimoni: "Lorem ipsum dollar sianet lorem ipsum dollar sianet." },
-    { fullname: "Felix Odo", departemen: "CFO", testimoni: "Lorem ipsum dollar sianet lorem ipsum dollar sianet." },
-    { fullname: "Michael Smith", departemen: "CMO", testimoni: "Lorem ipsum dollar sianet lorem ipsum dollar sianet." },
-    { fullname: "Douglas Alvarado", departemen: "CEO", testimoni: "Lorem ipsum dollar sianet lorem ipsum dollar sianet." },
-    { fullname: "Jane Sarah", departemen: "COO", testimoni: "Lorem ipsum dollar sianet lorem ipsum dollar sianet." },
-    { fullname: "Felix Odo", departemen: "CFO", testimoni: "Lorem ipsum dollar sianet lorem ipsum dollar sianet." },
-    { fullname: "Michael Smith", departemen: "CMO", testimoni: "Lorem ipsum dollar sianet lorem ipsum dollar sianet." },
-];
-
 interface testi {
     fullname: string;
     departemen: string;
@@ -30,15 +19,14 @@ const SpeakerSlider = () => {
 
     const getTesti = async () => {
         try {
+            // const response = await axios.get('http://localhost:3001/testi')
             const response = await axios.get('https://metri-backend.vercel.app/testi')
-            if(response.status === 200) {
-                const {data} = response.data;
-                setData(data);
-            }else{
-                setData(speakers);
-            }
+            
+            const { data } = response.data;
+            setData(data);
+
         } catch (error) {
-            setData(speakers);
+            console.log(error)
         }
         
     }
@@ -55,7 +43,7 @@ const SpeakerSlider = () => {
                 breakpoints={{
                     640: { slidesPerView: 2 },
                     768: { slidesPerView: 3 },
-                    1024: { slidesPerView: 4 },
+                    1024: { slidesPerView: 3 },
                 }}
                 pagination={false}
                 longSwipes={true}
@@ -63,10 +51,10 @@ const SpeakerSlider = () => {
             >
                 {data.map((d, index) => (
                     <SwiperSlide key={index} >
-                        <div className="flex flex-col z-0 items-center text-center p-4 border-2 border-yellow-500 rounded-lg shadow-lg">
+                        <div className="flex flex-col z-0 h-[200px] items-center text-center p-4 border-2 border-yellow-500 rounded-lg shadow-lg">
                             <h3 className="mt-2 text-lg font-semibold text-white">{d.fullname}</h3>
                             <p className="text-sm text-gray-300">{d.departemen}</p>
-                            <p className="mt-2 text-sm text-gray-400 italic">"{d.testimoni}"</p>
+                            <p className="mt-2 text-sm text-gray-400" dangerouslySetInnerHTML={{ __html: d.testimoni }}></p>
                         </div>
                     </SwiperSlide>
                 ))}
