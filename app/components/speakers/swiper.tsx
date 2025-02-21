@@ -51,10 +51,10 @@ const SpeakerSlider = () => {
             >
                 {data.map((d, index) => (
                     <SwiperSlide key={index} >
-                        <div className="flex flex-col z-0 h-[200px] items-center text-center p-4 border-2 border-yellow-500 rounded-lg shadow-lg">
+                        <div className="flex flex-col z-0 h-[220px] items-center text-center p-4 border-2 border-yellow-500 rounded-lg shadow-lg">
                             <h3 className="mt-2 text-lg font-semibold text-white">{d.fullname}</h3>
-                            <p className="text-sm text-gray-300">{d.departemen}</p>
-                            <p className="mt-2 text-sm text-gray-400" dangerouslySetInnerHTML={{ __html: d.testimoni }}></p>
+                            <p className="text-sm mb-2 text-gray-300">{d.departemen}</p>
+                            <p className="mt-2 text-xl text-gray-400" dangerouslySetInnerHTML={{ __html: d.testimoni }}></p>
                         </div>
                     </SwiperSlide>
                 ))}
